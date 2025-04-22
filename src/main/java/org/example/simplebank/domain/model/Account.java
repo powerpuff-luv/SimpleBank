@@ -1,14 +1,25 @@
 package org.example.simplebank.domain.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Table(name = "accounts")
 @Entity
 public class Account {
 
@@ -18,52 +29,13 @@ public class Account {
 
     private String number;
 
-    private BigDecimal balance;
+    @Builder.Default
+    private BigDecimal balance = BigDecimal.ZERO;
 
-    private int pinCode;
+    @Builder.Default
+    private int pinCode = 1234;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "beneficiary_id")
     private Beneficiary beneficiary;
-
-    public Account() {
-    }
-
-    public Account(Beneficiary beneficiary) {
-        this.beneficiary = beneficiary;
-        this.balance = BigDecimal.valueOf(0);
-        this.pinCode = 1234;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public int getPinCode() {
-        return pinCode;
-    }
-
-    public void setPinCode(int pinCode) {
-        this.pinCode = pinCode;
-    }
-
-    public Beneficiary getBeneficiary() {
-        return beneficiary;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 }

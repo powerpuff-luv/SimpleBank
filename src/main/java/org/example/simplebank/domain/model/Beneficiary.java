@@ -5,11 +5,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
+@NoArgsConstructor
+@Data
+@Table(name = "beneficiaries")
 @Entity
-@Table(name = "beneficiary")
 public class Beneficiary {
 
     @Id
@@ -18,18 +20,7 @@ public class Beneficiary {
 
     private String name;
 
-    public Beneficiary() {
-    }
-
     public Beneficiary(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 }

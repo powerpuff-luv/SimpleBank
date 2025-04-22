@@ -1,9 +1,5 @@
 package org.example.simplebank.domain.dto;
 
-public class BeneficiaryCreationDto {
-    private String name;
-
-    public String getName() {
-        return name;
-    }
+public record BeneficiaryCreationDto(
+        String name) {
 }

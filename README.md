@@ -54,7 +54,7 @@
 2. Создание счёта (POST)
 
    ```bash
-   http://localhost:8080/simplebank/api/v1/beneficiaries/{beneficiaryId}/accounts
+   http://localhost:8080/simplebank/api/v1/accounts/{beneficiaryId}
    
    Body Example:
    {
@@ -72,22 +72,22 @@
 3. Перевод денежных средств (POST)
 
    ```bash
-   http://localhost:8080/simplebank/api/v1/beneficiaries/{beneficiaryId}/transfer/{}
+   http://localhost:8080/simplebank/api/v1/transfers/{beneficiaryId}/from/{accountNumber}
    
    Body Example:
    {
     "pinCode": 1111,
-    "accountToNumber": 50962027508738960975,
-    "sum": 100.00
+    "toAccountNumber": 50962027508738960975,
+    "amount": 100.00
    }
    
    Response Example:
    200 OK
    
-4. Получение списка счетов
+4. Получение списка счетов (GET)
 
    ```bash
-   http://localhost:8080/simplebank/api/v1/allAccounts
+   http://localhost:8080/simplebank/api/v1/accounts
    
    Response Example:
    200 OK
@@ -117,7 +117,7 @@
 5. Получение списка транзакций по конкретному счету (GET)
 
    ```bash
-   http://localhost:8080/simplebank/api/v1/beneficiaries/{beneficiaryId}/accounts/{accountId}/allTransactions
+   http://localhost:8080/simplebank/api/v1/transactions/account/{accountId}
    
    Response Example:
    200 OK

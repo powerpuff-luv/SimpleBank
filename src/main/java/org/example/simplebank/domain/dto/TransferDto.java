@@ -1,21 +1,12 @@
 package org.example.simplebank.domain.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
-public class TransferDto {
-    private int pinCode;
-    private String accountToNumber;
-    private BigDecimal sum;
-
-    public int getPinCode() {
-        return pinCode;
-    }
-
-    public String getAccountToNumber() {
-        return accountToNumber;
-    }
-
-    public BigDecimal getSum() {
-        return sum;
-    }
+@Schema(description = "Модель данных для перевода между счетами")
+public record TransferDto(
+        int pinCode,
+        String toAccountNumber,
+        BigDecimal amount) {
 }

@@ -1,26 +1,27 @@
 package org.example.simplebank.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.simplebank.domain.dto.BeneficiaryCreationDto;
 import org.example.simplebank.domain.dto.BeneficiaryIdDto;
-import org.example.simplebank.domain.model.Beneficiary;
 import org.example.simplebank.service.BeneficiaryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/beneficiaries")
+@RestController
 public class BeneficiaryController {
 
     private final BeneficiaryService beneficiaryService;
 
-    public BeneficiaryController(BeneficiaryService beneficiaryService) {
-        this.beneficiaryService = beneficiaryService;
-    }
-
     @PostMapping
-    public BeneficiaryIdDto createBeneficiary(@RequestBody BeneficiaryCreationDto beneficiaryCreationDto) {
-        return beneficiaryService.createBeneficiary(beneficiaryCreationDto);
+    public ResponseEntity<BeneficiaryIdDto> createBeneficiary(
+            @RequestBody BeneficiaryCreationDto beneficiaryCreationDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                beneficiaryService.createBeneficiary(beneficiaryCreationDto));
     }
 }
