@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * TODO описать эндпоинты, параметры, модели данных в OpenAPI и Javadoc
  * <a href="http://localhost:8080/simplebank/swagger-ui/index.html">swagger-ui</a>
- * TODO добавить логирование, создать контейнеры для бд и приложения
+ * TODO добавить логирование
  */
 @SpringBootApplication
 public class SimpleBankApplication {
