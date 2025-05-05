@@ -1,20 +1,17 @@
-# Use official OpenJDK 17 image
-FROM maven:3.8.6-eclipse-temurin-17
-
-# Set working directory
+# Stage 1: Build with Maven
+FROM maven:3.8.6-eclipse-temurin-17 AS builder
 WORKDIR /app
-
-# Copy pom.xml
 COPY pom.xml .
-
-# Copy source code
 COPY src src
+RUN mvn clean package -DskipTests
 
-# Build the application
-RUN mvn clean package
+# Stage 2: Runtime image
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /app
+COPY --from=builder /app/target/SimpleBank-*.jar app.jar
 
-# Expose the port
+RUN addgroup --system spring && adduser --system --ingroup spring spring
+USER spring:spring
+
 EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "target/SimpleBank-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
